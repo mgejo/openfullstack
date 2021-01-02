@@ -3,32 +3,28 @@ import ReactDOM from 'react-dom'
 
 const App = () => {
   // const-definitions
-  const course = 'Half Stack application development'
-  const part1 = 'Fundamentals of React'
-  const exercises1 = 10
-  const part2 = 'Using props to pass data'
-  const exercises2 = 7
-  const part3 = 'State of a component'
-  const exercises3 = 14
-  const part_exercise_list = [
-    {
-      name:part1,
-      excercises:exercises1
-    },
-    {
-      name:part2,
-      excercises:exercises2
-    },
-    {
-      name:part3,
-      excercises:exercises3
-    }
-  ]
+  const course = {
+    name: 'Half Stack application development',
+    parts: [
+      {
+        name: 'Fundamentals of React',
+        exercises: 10
+      },
+      {
+        name: 'Using props to pass data',
+        exercises: 7
+      },
+      {
+        name: 'State of a component',
+        exercises: 14
+      }
+    ]
+  }
   return (
     <div>
-      <Header course={course} />
-      <Content list={part_exercise_list} />
-      <Total list={part_exercise_list} />
+      <Header course={course.name} />
+      <Content list={course.parts} />
+      <Total list={course.parts} />
     </div>
   )
 }
@@ -55,13 +51,13 @@ const Content = (props) => {
 
 const Part = (props) => {
   const obj = props.obj
-  return (<p>{obj.name} {obj.excercises}</p>)
+  return (<p>{obj.name} {obj.exercises}</p>)
 }
 
 const Total = (props) => {
   let total_exercises = 0
   for (const obj of props.list){
-    total_exercises += obj.excercises
+    total_exercises += obj.exercises
   }
   return (
     <p>
