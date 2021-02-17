@@ -41,10 +41,7 @@ const App = () => {
           displayMessage(`${person.name} phone updated`, "success");
         })
         .catch((error) => {
-          displayMessage(`${person.name} has been removed`, "error");
-          const newPersons = persons.filter((p) => p.id !== person.id);
-          setPersons(newPersons);
-          applyFilter(filter, newPersons);
+          displayMessage(error.response.data.error, "error");
         });
     }
     if (!person) {
@@ -55,7 +52,8 @@ const App = () => {
           setPersons(newPersons);
           applyFilter(filter, newPersons);
           displayMessage(`${newName} phone added`, "success");
-        });
+        })
+        .catch((error) => displayMessage(error.response.data.error, "error"));
     }
     setNewName("");
     setNewNumber("");
